@@ -1,0 +1,29 @@
+{
+  "name": "coa-env",
+  "version": "1.0.0",
+  "description": "env component for coa",
+  "keywords": [
+    "coajs",
+    "coa",
+    "env"
+  ],
+  "license": "MIT",
+  "author": "Aex",
+  "homepage": "https://github.com/coajs/coa-env",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coajs/coa-env.git"
+  },
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "rm -rf dist && tsc && cp package.json dist",
+    "npm-publish": "yarn build && yarn version --patch && cp package.json README.md dist && cd dist && npm publish"
+  },
+  "dependencies": {
+    "extend2": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.5",
+    "typescript": "^3.9.3"
+  }
+}
