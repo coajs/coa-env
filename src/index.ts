@@ -1,5 +1,9 @@
-import env from './env'
+import env_fc from './env-fc'
+import env_var from './env-var'
 
-type Env = typeof env
+export { Env } from './typing'
+export const env = env_fc.set(env_var)
 
-export { env, Env }
+if (env.envBase) {
+  require(env.envBase).default(env)
+}
