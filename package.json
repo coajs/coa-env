@@ -1,6 +1,6 @@
 {
   "name": "coa-env",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "env component for coa",
   "keywords": [
     "coajs",
@@ -20,10 +20,10 @@
     "npm-publish": "yarn build && yarn version --patch && cp package.json README.md dist && cd dist && npm publish"
   },
   "dependencies": {
-    "extend2": "^1.0.0"
+    "coa-error": "^1.1.2"
   },
   "devDependencies": {
-    "@types/node": "^14.0.5",
-    "typescript": "^3.9.3"
+    "@types/node": "^14.14.7",
+    "typescript": "^4.0.5"
   }
 }
