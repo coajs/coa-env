@@ -2,7 +2,6 @@ import { CoaError } from 'coa-error'
 
 // 以下属性均为只读属性，不可修改，在实例创建时刻就已经固定
 export class CoaEnv {
-
   // runEnv 运行环境，一般定义为开发类环境('d0' 'd1' 'd2') 测试类环境('t0' 't1' 't2') 生产类环境('v0' 'v1' 'v2')等
   // 由环境变量 process.env.RUN_ENV 控制，如果没有定义，则默认为 'd0'
   public readonly runEnv: string
@@ -31,21 +30,21 @@ export class CoaEnv {
   // 当前运行的版本号，解耦出来，由外部程序控制，创建实例时必传此参数
   public readonly version: string
 
-  constructor (version: string) {
+  constructor(version: string) {
     const env = process.env || {}
     this.cwd = process.cwd()
     this.version = version
-    this.runEnv = env.RUN_ENV || 'd0'
+    this.runEnv = env.RUN_ENV ?? 'd0'
     this.runEnvType = this.runEnv.substr(0, 1)
-    this.runEnvName = ({ d: 'alpha', t: 'beta', v: 'online' } as { [key: string]: string })[this.runEnvType] || 'unknown'
-    this.name = env.npm_package_name || ''
-    this.hostname = env.HOSTNAME || 'local'
+    this.runEnvName = { d: 'alpha', t: 'beta', v: 'online' }[this.runEnvType] ?? 'unknown'
+    this.name = env.npm_package_name ?? ''
+    this.hostname = env.HOSTNAME ?? 'local'
     this.isProd = env.NODE_ENV === 'production'
     this.isOnline = this.runEnvType === 'v'
   }
 
   // 根据环境获取对应配置信息
-  getConfig<T> (configs: { $?: T, d?: T, t?: T, v?: T, d0?: T, d1?: T, t1?: T, v1?: T }) {
-    return configs[this.runEnv as '$'] || configs[this.runEnvType as '$'] || configs['$'] || CoaError.throw('Env.ConfigNotFound', '配置信息不存在')
+  getConfig<T>(configs: { $?: T; d?: T; t?: T; v?: T; d0?: T; d1?: T; t1?: T; v1?: T }) {
+    return configs[this.runEnv as '$'] ?? configs[this.runEnvType as '$'] ?? configs.$ ?? CoaError.throw('Env.ConfigNotFound', '配置信息不存在')
   }
 }

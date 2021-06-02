@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { CoaEnv } from './CoaEnv'
 
 // 创建一个新的环境实例
